@@ -1,9 +1,13 @@
 #!/usr/bin/env python3
 """
 Get NVDA last price from BOATS feed using Alpaca-py
+Updated to work with C# RTD server
 """
 
 import os
+import json
+import tempfile
+import time
 from alpaca.data.historical import StockHistoricalDataClient
 from alpaca.data.requests import StockLatestTradeRequest, StockLatestQuoteRequest
 from alpaca.data.enums import DataFeed
@@ -65,6 +69,22 @@ def main():
         # Calculate spread
         spread = quote_data.ask_price - quote_data.bid_price
         print(f"Spread: ${spread:.4f}")
+        
+        # Save data for C# RTD server
+        data_for_rtd = {
+            "BidPrice": float(quote_data.bid_price),
+            "AskPrice": float(quote_data.ask_price),
+            "LastPrice": float(trade_data.price),
+            "Timestamp": str(quote_data.timestamp)
+        }
+        
+        # Write to temporary file for C# RTD server to read
+        rtd_file_path = os.path.join(tempfile.gettempdir(), "nvda_price_data.json")
+        with open(rtd_file_path, 'w') as f:
+            json.dump(data_for_rtd, f)
+        
+        print(f"\nData saved to: {rtd_file_path}")
+        print("RTD data:", data_for_rtd)
         
         # BOATS feed version (commented out - requires special subscription)
         # To use BOATS feed, uncomment the following and comment out the IEX version above:
