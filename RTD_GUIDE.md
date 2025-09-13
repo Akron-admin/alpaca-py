@@ -2,6 +2,33 @@
 
 ## 🚀 Quick Start Guide
 
+### Prerequisites (New Computer Setup):
+
+**Required Software:**
+- **Windows** (COM/RTD is Windows-only)
+- **Microsoft Excel** (any recent version)
+- **.NET 8.0 SDK** - [Download from Microsoft](https://dotnet.microsoft.com/download) or `winget install Microsoft.DotNet.SDK.8`
+- **Python 3.8+** - [Download from python.org](https://www.python.org/downloads/) or `winget install Python.Python.3.12`
+- **Git** (optional) - For cloning repository
+
+**Python Packages:**
+```bash
+pip install alpaca-py
+```
+
+**Environment Variables:**
+```bash
+# Set your Alpaca API credentials
+set ALPACA_API_KEY=your_key_here
+set ALPACA_SECRET_KEY=your_secret_here
+```
+
+**Development Tools (Optional):**
+- **VS Code** with C# and Python extensions
+- **Visual Studio Community** (alternative to VS Code)
+
+---
+
 ### To Use Our StockRTD Server:
 
 ```bash
